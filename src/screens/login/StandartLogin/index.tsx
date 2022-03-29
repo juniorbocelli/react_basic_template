@@ -11,12 +11,14 @@ import {
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 
-import TopFormAvatar from '../components/TopFormAvatar';
+import TopFormAvatar from './components/TopFormAvatar';
 import TextInput from '../../../ui/components/form/TextInput';
 
 import useStates from './states';
 import * as Rules from '../../../features/validation/rules';
 import { COMPANY_NAME } from '../../../globals/strings';
+
+import { FormData } from './types';
 
 function Copyright() {
   return (
@@ -31,22 +33,21 @@ function Copyright() {
   );
 }
 
-export default function SignIn() {
+export default function StandartLogin() {
   const states = useStates();
   const theme = useTheme();
 
-  const { register, formState: { errors }, handleSubmit } = useForm();
+  const { register, formState: { errors }, handleSubmit } = useForm<FormData>();
 
   const {
     hasError,
     errorMessage
   } = states;
 
-  const onSubmit = (data: { username: string, password: string }) => {
+  const onSubmit = (data: FormData) => {
     console.log(data);
     // Here: API that send login data
-    return null;
-  }
+  };
 
   return (
     <Container component="main" maxWidth="xs">

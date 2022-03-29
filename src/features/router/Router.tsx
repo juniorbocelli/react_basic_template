@@ -12,7 +12,7 @@ import Navigation from '../../features/navigation/Navigation';
 import CheckSession from '../auth/CheckSession';
 
 import ModelOne from '../../screens/models/ModelOne';
-import SignIn from '../../screens/login/SignIn';
+import Login from '../../screens/login/Login';
 
 const LoggedRoutes = React.memo((props) => {
   return (
@@ -27,7 +27,7 @@ const LoggedRoutes = React.memo((props) => {
 const NotLoggedRoutes = React.memo((props) => {
   return (
     <Routes>
-      <Route path={GlobalRoutes.SCREEN_LOGIN} element={<SignIn />} />
+      <Route path={GlobalRoutes.SCREEN_LOGIN} element={<Login />} />
 
       <Route path='*' element={<Navigate to={GlobalRoutes.SCREEN_LOGIN} replace />} />
     </Routes>

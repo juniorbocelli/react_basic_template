@@ -8,7 +8,7 @@ import {
 } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
-import { COMPANY_NAME } from '../../../../globals/strings';
+import { COMPANY_NAME } from '../../../../../globals/strings';
 
 interface IProps {
   userName: string | null;
