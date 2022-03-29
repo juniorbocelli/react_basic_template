@@ -8,16 +8,15 @@ import {
 
 import BreadCrumbs from '../../../../components/BreadCrumbs';
 import PageTitle from '../../../../components/PageTitle';
-import BackDrop from '../../../../ui/components/BackDrop';
-import AlertDialog from '../../../../ui/components/AlertDialog';
-import Footer from '../../../../ui/components/Footer';
+import BackDrop from '../../BackDrop';
+import AlertDialog from '../../AlertDialog';
 
 import {
   IsQueryingAPIState,
   ErrorMessageState,
 } from './types';
 
-interface IMainContentBoxProps {
+interface IAdminMainContentBoxProps {
   children?: React.ReactNode;
   primary?: string;
 
@@ -36,7 +35,7 @@ interface IMainContentBoxProps {
 
 };
 
-const MainContentBox: React.FC<IMainContentBoxProps> = (props) => {
+const AdminMainContentBox: React.FC<IAdminMainContentBoxProps> = (props) => {
   const theme = useTheme();
 
   const {
@@ -116,10 +115,8 @@ const MainContentBox: React.FC<IMainContentBoxProps> = (props) => {
         </Box>
 
       </Box>
-
-      <Footer />
     </Box >
   );
 };
 
-export default MainContentBox;
+export default AdminMainContentBox;
