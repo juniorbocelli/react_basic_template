@@ -2,6 +2,10 @@ export function twoZeros(number: string | number): string {
   return ("0" + String(number)).slice(-2);
 };
 
+export function onlyNumbers(value: string): string {
+  return value.replace(/\D/g, "");
+};
+
 // Format dd/mm/yyyy
 export function printDateFromTimestamp(timestamp: Date | number | string): string {
   var date: Date | number | string;
@@ -18,7 +22,7 @@ export function printDateFromTimestamp(timestamp: Date | number | string): strin
   day = twoZeros(date.getUTCDate());
 
   return day + "/" + month + "/" + year;
-}
+};
 
 // Format mm/yyyy
 export function printCompetenceFromTimestamp(timestamp: Date | number | string): string {
@@ -35,7 +39,7 @@ export function printCompetenceFromTimestamp(timestamp: Date | number | string):
   month = twoZeros(date.getUTCMonth() + 1);
 
   return month + "/" + year;
-}
+};
 
 // Format dd/mm/yyyy 00:00
 export function printDateTimeFromTimestamp(timestamp: Date | number | string): string {
@@ -152,36 +156,48 @@ export function maskMoney(number: number | string): string {
   money = intPart + "," + centPart;
 
   return money;
-}
+};
 
-export function mask_cnpj_cpf(value: string): string {
-  let nValue = value.replace(/\D/g, "");
+export function maskCpf(value: string): string {
+  let nValue = onlyNumbers(value);
 
-  if (nValue.length <= 11) {
-    if (nValue.length > 11) {
-      nValue = nValue.substring(0, 11);
-    };
-
-    nValue = nValue.replace(/^(\d{3})(\d)/, "$1.$2");
-    nValue = nValue.replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3");
-    nValue = nValue.replace(/^(\d{3})\.(\d{3}).(\d{3})(\d)/, "$1.$2.$3-$4");
-    //value = value.replace(/(\d{3})(\d)/, "$1-$2");
-  } else {
-    if (nValue.length > 14) {
-      nValue = nValue.substring(0, 14);
-    };
-
-    nValue = nValue.replace(/^(\d{2})(\d)/, "$1.$2");
-    nValue = nValue.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
-    nValue = nValue.replace(/\.(\d{3})(\d)/, ".$1/$2");
-    nValue = nValue.replace(/(\d{4})(\d)/, "$1-$2");
+  if (nValue.length > 11) {
+    nValue = nValue.substring(0, 11);
   };
+
+  nValue = nValue.replace(/^(\d{3})(\d)/, "$1.$2");
+  nValue = nValue.replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3");
+  nValue = nValue.replace(/^(\d{3})\.(\d{3}).(\d{3})(\d)/, "$1.$2.$3-$4");
 
   return nValue;
 };
 
-export function maskCEP(s: string): string {
-  let digits = s.replace(/\D/g, "");
+export function maskCnpj(value: string): string {
+  let nValue = onlyNumbers(value);
+
+  if (nValue.length > 14) {
+    nValue = nValue.substring(0, 14);
+  };
+
+  nValue = nValue.replace(/^(\d{2})(\d)/, "$1.$2");
+  nValue = nValue.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+  nValue = nValue.replace(/\.(\d{3})(\d)/, ".$1/$2");
+  nValue = nValue.replace(/(\d{4})(\d)/, "$1-$2");
+
+  return nValue;
+};
+
+export function maskCpfOrCnpj(value: string): string {
+  let nValue = onlyNumbers(value);
+
+  if (nValue.length <= 11)
+    return maskCpf(nValue);
+  else
+  return maskCnpj(nValue);
+};
+
+export function maskCep(s: string): string {
+  let digits = onlyNumbers(s);
 
   if (digits.length !== 8) return "";
 
